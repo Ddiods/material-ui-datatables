@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from 'react';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import ClearIcon from 'material-ui/svg-icons/content/clear';
-import FilterListIcon from 'material-ui/svg-icons/content/filter-list';
-import SearchIcon from 'material-ui/svg-icons/action/search';
-import TextField from 'material-ui/TextField';
-import {blue500} from 'material-ui/styles/colors';
+import React, { Component, PropTypes } from 'react'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
+import IconButton from 'material-ui/IconButton'
+import ClearIcon from 'material-ui/svg-icons/content/clear'
+import FilterListIcon from 'material-ui/svg-icons/content/filter-list'
+import SearchIcon from 'material-ui/svg-icons/action/search'
+import TextField from 'material-ui/TextField'
+import { blue500 } from 'material-ui/styles/colors'
 
-function getStyles(context) {
+function getStyles (context) {
   const {
     table,
-  } = context.muiTheme;
+  } = context.muiTheme
 
   return {
     headerToolbar: {
@@ -45,11 +45,11 @@ function getStyles(context) {
     toolbarTitle: {
       lineHeight: '72px',
     },
-  };
+  }
 }
 
 class DataTablesHeaderToolbar extends Component {
-  static muiName = 'DataTablesHeaderToolbar';
+  static muiName = 'DataTablesHeaderToolbar'
 
   static propTypes = {
     filterHintText: PropTypes.string,
@@ -58,90 +58,88 @@ class DataTablesHeaderToolbar extends Component {
     title: PropTypes.string,
     titleStyle: PropTypes.object,
     toolbarIconRight: PropTypes.node,
-  };
+  }
 
-  static defaultProps = {
-
-  };
+  static defaultProps = {}
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
-  };
+  }
 
-  constructor(props, context) {
-    super(props, context);
-    this.filterValueTimer = undefined;
+  constructor (props, context) {
+    super(props, context)
+    this.filterValueTimer = undefined
     this.state = {
       mode: 'default',
       filterValue: '',
-    };
+    }
   }
 
   handleFilterClick = () => {
-    const mode = this.state.mode === 'default' ? 'filter' : 'default';
-    const {filterValue} = this.state;
+    const mode = this.state.mode === 'default' ? 'filter' : 'default'
+    const {filterValue} = this.state
     this.setState({
       mode: mode,
       filterValue: '',
-    });
+    })
     if (mode === 'default' && filterValue !== '') {
-      this.emitFilterValueChange('');
+      this.emitFilterValueChange('')
     }
   }
 
   handleClearClick = () => {
-    const {filterValue} = this.state;
+    const {filterValue} = this.state
     if (filterValue !== '') {
       this.setState({
         filterValue: '',
-      });
-      this.emitFilterValueChange('');
+      })
+      this.emitFilterValueChange('')
     }
   }
 
   handleFilterValueChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value
     this.setState({
       filterValue: value,
-    });
-    clearTimeout(this.filterValueTimer);
+    })
+    clearTimeout(this.filterValueTimer)
     this.filterValueTimer = setTimeout(() => {
-      this.emitFilterValueChange(value);
-    }, 500);
+      this.emitFilterValueChange(value)
+    }, 500)
   }
 
   emitFilterValueChange = (value) => {
-    const {onFilterValueChange} = this.props;
+    const {onFilterValueChange} = this.props
     if (onFilterValueChange) {
-      onFilterValueChange(value);
+      onFilterValueChange(value)
     }
   }
 
-  render() {
+  render () {
     const {
       filterHintText,
       toolbarIconRight,
       title, // eslint-disable-line no-unused-vars
       titleStyle,
       ...other, // eslint-disable-line no-unused-vars, comma-dangle
-    } = this.props;
+    } = this.props
 
     const {
       mode,
       filterValue,
-    } = this.state;
+    } = this.state
 
-    const styles = getStyles(this.context);
+    const styles = getStyles(this.context)
 
-    let contentNode;
+    let contentNode
 
     if (mode === 'default') {
-      contentNode = (<ToolbarTitle style={Object.assign({}, styles.toolbarTitle, titleStyle)} text={title} />);
+      contentNode = (<ToolbarTitle style={Object.assign({}, styles.toolbarTitle, titleStyle)} text={title}/>)
     } else if (mode === 'filter') {
       contentNode = (
         <div style={styles.searchToolbarGroup}>
           <div>
-            <SearchIcon style={styles.headerToolbarSearchIcon} />
+            <SearchIcon style={styles.headerToolbarSearchIcon}/>
           </div>
           <div style={styles.searchInputTextField}>
             <TextField
@@ -161,10 +159,10 @@ class DataTablesHeaderToolbar extends Component {
             </IconButton>
           </div>
         </div>
-      );
+      )
     }
 
-    const toolbarIconRightChildren = [];
+    const toolbarIconRightChildren = []
     if (toolbarIconRight) {
       if (toolbarIconRight.length) {
         toolbarIconRight.map((toolbarIcon, i) => {
@@ -174,8 +172,8 @@ class DataTablesHeaderToolbar extends Component {
               style: Object.assign(styles.headerToolbarIconButton, styles.icon),
               key: i,
             }
-          ));
-        });
+          ))
+        })
       } else {
         toolbarIconRightChildren.push(React.cloneElement(
           toolbarIconRight,
@@ -183,7 +181,7 @@ class DataTablesHeaderToolbar extends Component {
             style: Object.assign(styles.headerToolbarIconButton, styles.icon),
             key: 1,
           }
-        ));
+        ))
       }
     }
 
@@ -202,8 +200,8 @@ class DataTablesHeaderToolbar extends Component {
           {toolbarIconRightChildren}
         </ToolbarGroup>
       </Toolbar>
-    );
+    )
   }
 }
 
-export default DataTablesHeaderToolbar;
+export default DataTablesHeaderToolbar

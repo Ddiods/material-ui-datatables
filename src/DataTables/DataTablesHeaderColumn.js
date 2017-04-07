@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
-import {TableHeaderColumn} from 'material-ui/Table';
-import Tooltip from 'material-ui/internal/Tooltip';
-import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
-import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward';
+import React, { PropTypes } from 'react'
+import { TableHeaderColumn } from 'material-ui/Table'
+import Tooltip from 'material-ui/internal/Tooltip'
+import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward'
+import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward'
 
-function getStyles(props, context, state) {
-  const {tableHeaderColumn} = context.muiTheme;
+function getStyles (props, context, state) {
+  const {tableHeaderColumn} = context.muiTheme
 
   return {
     root: {
@@ -43,11 +43,11 @@ function getStyles(props, context, state) {
       display: 'inline-block',
       verticalAlign: 'middle',
     },
-  };
+  }
 }
 
 class DataTablesHeaderColumn extends TableHeaderColumn {
-  static muiName = 'DataTablesHeaderColumn';
+  static muiName = 'DataTablesHeaderColumn'
 
   static propTypes = {
     children: PropTypes.node,
@@ -93,40 +93,39 @@ class DataTablesHeaderColumn extends TableHeaderColumn {
      */
     tooltipStyle: PropTypes.object,
 
-
-  };
+  }
 
   static defaultProps = {
     sortable: false,
     order: 'asc',
-  };
+  }
 
-  constructor(props, context) {
-    super(props, context);
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       sortHovered: false,
-    };
+    }
   }
 
   onMouseEnter = () => {
     if (this.props.tooltip !== undefined) {
-      this.setState({hovered: true});
+      this.setState({hovered: true})
     }
     if (this.props.sortable) {
-      this.setState({sortHovered: true});
+      this.setState({sortHovered: true})
     }
-  };
+  }
 
   onMouseLeave = () => {
     if (this.props.tooltip !== undefined) {
-      this.setState({hovered: false});
+      this.setState({hovered: false})
     }
     if (this.props.sortable) {
-      this.setState({sortHovered: false});
+      this.setState({sortHovered: false})
     }
-  };
+  }
 
-  render() {
+  render () {
     const {
       children,
       className,
@@ -142,18 +141,18 @@ class DataTablesHeaderColumn extends TableHeaderColumn {
       sorted,
       order,
       ...other, // eslint-disable-line comma-dangle
-    } = this.props;
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context, this.state)
 
     const handlers = {
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
       onClick: this.onClick,
-    };
+    }
 
-    let tooltipNode;
+    let tooltipNode
 
     if (tooltip !== undefined) {
       tooltipNode = (
@@ -162,29 +161,29 @@ class DataTablesHeaderColumn extends TableHeaderColumn {
           show={this.state.hovered}
           style={Object.assign(styles.tooltip, tooltipStyle)}
         />
-      );
+      )
     }
 
-    let sortIcon;
+    let sortIcon
 
     if (sorted && order === 'asc') {
-      sortIcon = (<div style={styles.iconWrapper}><ArrowUpward style={styles.sortIcon} /></div>);
+      sortIcon = (<div style={styles.iconWrapper}><ArrowUpward style={styles.sortIcon}/></div>)
     } else if (sorted && order === 'desc') {
-      sortIcon = (<div style={styles.iconWrapper}><ArrowDownward style={styles.sortIcon} /></div>);
+      sortIcon = (<div style={styles.iconWrapper}><ArrowDownward style={styles.sortIcon}/></div>)
     } else if (sortable) {
-      sortIcon = (<div style={styles.iconWrapper}><ArrowUpward style={styles.sortIcon} /></div>);
+      sortIcon = (<div style={styles.iconWrapper}><ArrowUpward style={styles.sortIcon}/></div>)
     }
 
-    let leftSortIcon;
-    let rightSortIcon;
+    let leftSortIcon
+    let rightSortIcon
 
     if (sortable && styles.root.textAlign === 'left') {
-      rightSortIcon = sortIcon;
+      rightSortIcon = sortIcon
     } else if (sortable && styles.root.textAlign === 'right') {
-      leftSortIcon = sortIcon;
+      leftSortIcon = sortIcon
     }
 
-    const titleNode = (<div style={styles.titleWrapper}>{children}</div>);
+    const titleNode = (<div style={styles.titleWrapper}>{children}</div>)
 
     return (
       <th
@@ -198,8 +197,8 @@ class DataTablesHeaderColumn extends TableHeaderColumn {
         {titleNode}
         {rightSortIcon}
       </th>
-    );
+    )
   }
 }
 
-export default DataTablesHeaderColumn;
+export default DataTablesHeaderColumn

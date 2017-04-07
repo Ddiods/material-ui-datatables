@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
-import {TableRowColumn} from 'material-ui/Table';
+import React, { PropTypes } from 'react'
+import { TableRowColumn } from 'material-ui/Table'
 
-function getStyles(props, context) {
-  const {tableRowColumn} = context.muiTheme;
+function getStyles (props, context) {
+  const {tableRowColumn} = context.muiTheme
 
   const styles = {
     root: {
@@ -14,17 +14,17 @@ function getStyles(props, context) {
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
-  };
-
-  if (React.Children.count(props.children) === 1 && !isNaN(props.children)) {
-    styles.textAlign = 'right';
   }
 
-  return styles;
+  if (React.Children.count(props.children) === 1 && !isNaN(props.children)) {
+    styles.textAlign = 'right'
+  }
+
+  return styles
 }
 
 class DataTablesRowColumn extends TableRowColumn {
-  static muiName = 'TableRowColumn';
+  static muiName = 'TableRowColumn'
 
   static propTypes = {
     children: PropTypes.node,
@@ -58,15 +58,15 @@ class DataTablesRowColumn extends TableRowColumn {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
-  };
+  }
 
   onDoubleClick = (event) => {
     if (this.props.onDoubleClick) {
-      this.props.onDoubleClick(event, this.props.columnNumber);
+      this.props.onDoubleClick(event, this.props.columnNumber)
     }
-  };
+  }
 
-  render() {
+  render () {
     const {
       children,
       className,
@@ -78,17 +78,17 @@ class DataTablesRowColumn extends TableRowColumn {
       onHoverExit, // eslint-disable-line no-unused-vars
       style,
       ...other, // eslint-disable-line comma-dangle
-    } = this.props;
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context);
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context)
 
     const handlers = {
       onClick: this.onClick,
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
       onDoubleClick: this.onDoubleClick,
-    };
+    }
 
     return (
       <td
@@ -99,8 +99,8 @@ class DataTablesRowColumn extends TableRowColumn {
       >
         {children}
       </td>
-    );
+    )
   }
 }
 
-export default DataTablesRowColumn;
+export default DataTablesRowColumn

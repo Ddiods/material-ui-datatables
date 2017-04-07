@@ -1,9 +1,9 @@
-import React from 'react';
-import {Table} from 'material-ui/Table';
+import React from 'react'
+import { Table } from 'material-ui/Table'
 
 class DataTablesTable extends Table {
 
-  createTableBody(base) {
+  createTableBody (base) {
     return React.cloneElement(
       base,
       {
@@ -19,12 +19,12 @@ class DataTablesTable extends Table {
         selectable: this.props.selectable,
         style: Object.assign({height: this.props.height}, base.props.style),
       }
-    );
+    )
   }
 
   onCellDoubleClick = (rowNumber, columnNumber, event) => {
-    if (this.props.onCellDoubleClick) this.props.onCellDoubleClick(rowNumber, columnNumber, event);
-  };
+    if (this.props.onCellDoubleClick) this.props.onCellDoubleClick(rowNumber, columnNumber, event)
+  }
 }
 
-export default DataTablesTable;
+export default DataTablesTable

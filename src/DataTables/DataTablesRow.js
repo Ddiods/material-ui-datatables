@@ -1,16 +1,16 @@
-import React, {PropTypes} from 'react';
-import {TableRow} from 'material-ui/Table';
+import React, { PropTypes } from 'react'
+import { TableRow } from 'material-ui/Table'
 
-function getStyles(props, context, state) {
-  const {tableRow} = context.muiTheme;
+function getStyles (props, context, state) {
+  const {tableRow} = context.muiTheme
 
-  let cellBgColor = 'inherit';
+  let cellBgColor = 'inherit'
   if (props.hovered || state.hovered) {
-    cellBgColor = tableRow.hoverColor;
+    cellBgColor = tableRow.hoverColor
   } else if (props.selected) {
-    cellBgColor = tableRow.selectedColor;
+    cellBgColor = tableRow.selectedColor
   } else if (props.striped) {
-    cellBgColor = tableRow.stripeColor;
+    cellBgColor = tableRow.stripeColor
   }
 
   return {
@@ -22,7 +22,7 @@ function getStyles(props, context, state) {
     cell: {
       backgroundColor: cellBgColor,
     },
-  };
+  }
 }
 
 class DataTablesTableRow extends TableRow {
@@ -119,34 +119,34 @@ class DataTablesTableRow extends TableRow {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
-  };
+  }
 
-  clicked = false;
+  clicked = false
 
-  clickTimer = undefined;
+  clickTimer = undefined
 
   onCellClick = (event, columnIndex) => {
-    event.persist();
+    event.persist()
     if (this.clicked) {
-      this.clicked = false;
-      clearTimeout(this.clickTimer);
+      this.clicked = false
+      clearTimeout(this.clickTimer)
       if (this.props.onCellDoubleClick) {
-        this.props.onCellDoubleClick(event, this.props.rowNumber, columnIndex);
+        this.props.onCellDoubleClick(event, this.props.rowNumber, columnIndex)
       }
     } else {
-      this.clicked = true;
+      this.clicked = true
       this.clickTimer = setTimeout(() => {
-        this.clicked = false;
+        this.clicked = false
         if (this.props.selectable && this.props.onCellClick) {
-          this.props.onCellClick(event, this.props.rowNumber, columnIndex);
+          this.props.onCellClick(event, this.props.rowNumber, columnIndex)
         }
-        event.ctrlKey = true;
-        this.onRowClick(event);
-      }, 300);
+        event.ctrlKey = true
+        this.onRowClick(event)
+      }, 300)
     }
-  };
+  }
 
-  render() {
+  render () {
     const {
       className,
       displayBorder, // eslint-disable-line no-unused-vars
@@ -165,10 +165,10 @@ class DataTablesTableRow extends TableRow {
       striped, // eslint-disable-line no-unused-vars
       style,
       ...other, // eslint-disable-line comma-dangle
-    } = this.props;
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context, this.state)
 
     const rowColumns = React.Children.map(this.props.children, (child, columnNumber) => {
       if (React.isValidElement(child)) {
@@ -180,9 +180,9 @@ class DataTablesTableRow extends TableRow {
           onHover: this.onCellHover,
           onHoverExit: this.onCellHoverExit,
           style: Object.assign({}, styles.cell, child.props.style),
-        });
+        })
       }
-    });
+    })
 
     return (
       <tr
@@ -192,8 +192,8 @@ class DataTablesTableRow extends TableRow {
       >
         {rowColumns}
       </tr>
-    );
+    )
   }
 }
 
-export default DataTablesTableRow;
+export default DataTablesTableRow

@@ -1,27 +1,27 @@
-import React, {Component, PropTypes} from 'react';
-import {TableHeader, TableRow} from 'material-ui/Table';
-import {Toolbar} from 'material-ui/Toolbar';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import React, { Component, PropTypes } from 'react'
+import { TableHeader, TableRow } from 'material-ui/Table'
+import { Toolbar } from 'material-ui/Toolbar'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+import FlatButton from 'material-ui/FlatButton'
+import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left'
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
 // customized components
-import DataTablesTable from './DataTablesTable';
-import DataTablesTableBody from './DataTablesTableBody';
-import DataTablesHeaderColumn from './DataTablesHeaderColumn';
-import DataTablesRow from './DataTablesRow';
-import DataTablesRowColumn from './DataTablesRowColumn';
-import DataTablesHeaderToolbar from './DataTablesHeaderToolbar';
+import DataTablesTable from './DataTablesTable'
+import DataTablesTableBody from './DataTablesTableBody'
+import DataTablesHeaderColumn from './DataTablesHeaderColumn'
+import DataTablesRow from './DataTablesRow'
+import DataTablesRowColumn from './DataTablesRowColumn'
+import DataTablesHeaderToolbar from './DataTablesHeaderToolbar'
 
-function getStyles(props, context) {
+function getStyles (props, context) {
   const {
     baseTheme: {
       palette,
     },
     table,
     tableHeaderColumn,
-  } = context.muiTheme;
+  } = context.muiTheme
 
   return {
     tableHeaderColumn: {
@@ -53,19 +53,19 @@ function getStyles(props, context) {
     rowSizeMenu: {
       color: tableHeaderColumn.textColor,
     },
-  };
+  }
 }
 
-function isRowSelected(index, selectedRows) {
+function isRowSelected (index, selectedRows) {
   if (Array.isArray(selectedRows)) {
-    return selectedRows.includes(index);
+    return selectedRows.includes(index)
   } else {
-    return false;
+    return false
   }
 }
 
 class DataTables extends Component {
-  static muiName = 'DataTables';
+  static muiName = 'DataTables'
 
   static propTypes = {
     columns: PropTypes.array.isRequired,
@@ -101,18 +101,18 @@ class DataTables extends Component {
     title: PropTypes.string,
     titleStyle: PropTypes.object,
     toolbarIconRight: PropTypes.node,
-  };
+  }
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
-  };
+  }
 
   static defaultProps = {
     rowSize: 10,
     rowSizeLabel: 'Rows per page:',
     rowSizeList: [10, 30, 50, 100],
     summaryLabelTemplate: (start, end, count) => {
-      return `${start} - ${end} of ${count}`;
+      return `${start} - ${end} of ${count}`
     },
     filterHintText: 'Search',
     columns: [],
@@ -131,42 +131,42 @@ class DataTables extends Component {
     showCheckboxes: false,
     height: 'inherit',
     showHeaderToolbar: false,
-  };
+  }
 
-  constructor(props, context) {
-    super(props, context);
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       sort: {
         column: '',
         order: 'asc',
       },
-    };
+    }
   }
 
   handleHeaderColumnClick = (event, rowIndex, columnIndex) => {
-    const adjustedColumnIndex = columnIndex - 1;
-    const column = this.props.columns[adjustedColumnIndex];
+    const adjustedColumnIndex = columnIndex - 1
+    const column = this.props.columns[adjustedColumnIndex]
     if (column && column.sortable) {
-      const {sort} = this.state;
-      const {onSortOrderChange} = this.props;
-      const key = column.key;
-      const order = sort.column === column.key && sort.order === 'asc' ? 'desc' : 'asc';
+      const {sort} = this.state
+      const {onSortOrderChange} = this.props
+      const key = column.key
+      const order = sort.column === column.key && sort.order === 'asc' ? 'desc' : 'asc'
       this.setState({
         sort: {
           column: key,
           order: order,
         },
-      });
+      })
       if (onSortOrderChange) {
-        onSortOrderChange(key, order);
+        onSortOrderChange(key, order)
       }
     }
   }
 
   handleCellClick = (rowIndex, columnIndex, event) => {
-    const {onCellClick, selectable} = this.props;
+    const {onCellClick, selectable} = this.props
     if (onCellClick && !selectable) {
-      const adjustedColumnIndex = this.props.showCheckboxes ? columnIndex : columnIndex - 1;
+      const adjustedColumnIndex = this.props.showCheckboxes ? columnIndex : columnIndex - 1
       onCellClick(
         rowIndex,
         adjustedColumnIndex,
@@ -175,14 +175,14 @@ class DataTables extends Component {
         // clicked column
         this.props.data[rowIndex][this.props.columns[adjustedColumnIndex].key],
         event
-      );
+      )
     }
   }
 
   handleCellDoubleClick = (rowIndex, columnIndex, event) => {
-    const {onCellDoubleClick} = this.props;
+    const {onCellDoubleClick} = this.props
     if (onCellDoubleClick) {
-      const adjustedColumnIndex = this.props.showCheckboxes ? columnIndex : columnIndex - 1;
+      const adjustedColumnIndex = this.props.showCheckboxes ? columnIndex : columnIndex - 1
       onCellDoubleClick(
         rowIndex,
         adjustedColumnIndex,
@@ -191,46 +191,46 @@ class DataTables extends Component {
         // clicked column
         this.props.data[rowIndex][this.props.columns[adjustedColumnIndex].key],
         event
-      );
+      )
     }
   }
 
   handleRowSizeChange = (event, index, value) => {
-    const {onRowSizeChange} = this.props;
+    const {onRowSizeChange} = this.props
     if (onRowSizeChange) {
-      onRowSizeChange(index, value);
+      onRowSizeChange(index, value)
     }
   }
 
   handlePreviousPageClick = (event) => {
-    const {onPreviousPageClick} = this.props;
+    const {onPreviousPageClick} = this.props
     if (onPreviousPageClick) {
-      onPreviousPageClick(event);
+      onPreviousPageClick(event)
     }
   }
 
   handleNextPageClick = (event) => {
-    const {onNextPageClick} = this.props;
+    const {onNextPageClick} = this.props
     if (onNextPageClick) {
-      onNextPageClick(event);
+      onNextPageClick(event)
     }
   }
 
   handleFilterValueChange = (value) => {
-    const {onFilterValueChange} = this.props;
+    const {onFilterValueChange} = this.props
     if (onFilterValueChange) {
-      onFilterValueChange(value);
+      onFilterValueChange(value)
     }
   }
 
   handleRowSelection = (selectedRows) => {
-    const {onRowSelection} = this.props;
+    const {onRowSelection} = this.props
     if (onRowSelection) {
-      onRowSelection(selectedRows);
+      onRowSelection(selectedRows)
     }
   }
 
-  render() {
+  render () {
     const {
       title,
       titleStyle,
@@ -257,28 +257,28 @@ class DataTables extends Component {
       toolbarIconRight,
       count,
       ...other, // eslint-disable-line no-unused-vars, comma-dangle
-    } = this.props;
+    } = this.props
 
-    const styles = getStyles(this.props, this.context);
+    const styles = getStyles(this.props, this.context)
 
-    let start = (page - 1) * rowSize + 1;
-    let end = (page - 1) * rowSize + rowSize;
-    const totalCount = count === 0 ? data.length : count;
-    let previousButtonDisabled = page === 1;
-    let nextButtonDisabled = false;
+    let start = (page - 1) * rowSize + 1
+    let end = (page - 1) * rowSize + rowSize
+    const totalCount = count === 0 ? data.length : count
+    let previousButtonDisabled = page === 1
+    let nextButtonDisabled = false
     if (totalCount === 0) {
-      start = 0;
-      previousButtonDisabled = true;
+      start = 0
+      previousButtonDisabled = true
     } else if (start > totalCount) {
-      start = 1;
-      previousButtonDisabled = true;
+      start = 1
+      previousButtonDisabled = true
     }
     if (end >= totalCount) {
-      end = totalCount;
-      nextButtonDisabled = true;
+      end = totalCount
+      nextButtonDisabled = true
     }
 
-    let headerToolbar;
+    let headerToolbar
     if (showHeaderToolbar) {
       headerToolbar = (
         <DataTablesHeaderToolbar
@@ -288,7 +288,7 @@ class DataTables extends Component {
           onFilterValueChange={this.handleFilterValueChange}
           toolbarIconRight={toolbarIconRight}
         />
-      );
+      )
     }
 
     return (
@@ -311,10 +311,10 @@ class DataTables extends Component {
           >
             <TableRow onCellClick={this.handleHeaderColumnClick}>
               {columns.map((row, index) => {
-                const style = Object.assign({}, styles.tableHeaderColumn, row.style || {});
-                const sortable = row.sortable;
-                const sorted = this.state.sort.column === row.key;
-                const order = sorted ? this.state.sort.order : 'asc';
+                const style = Object.assign({}, styles.tableHeaderColumn, row.style || {})
+                const sortable = row.sortable
+                const sorted = this.state.sort.column === row.key
+                const order = sorted ? this.state.sort.order : 'asc'
                 return (
                   <DataTablesHeaderColumn
                     key={index}
@@ -327,7 +327,7 @@ class DataTables extends Component {
                   >
                     <span>{row.label}</span>
                   </DataTablesHeaderColumn>
-                );
+                )
               }, this)}
             </TableRow>
           </TableHeader>
@@ -352,10 +352,10 @@ class DataTables extends Component {
                       >
                         {row[mrow.key]}
                       </DataTablesRowColumn>
-                    );
+                    )
                   })}
                 </DataTablesRow>
-              );
+              )
             })}
           </DataTablesTableBody>
         </DataTablesTable>
@@ -376,7 +376,7 @@ class DataTables extends Component {
                     value={rowSize}
                     primaryText={rowSize}
                   />
-                );
+                )
               })}
             </DropDownMenu>
             <div style={styles.footerToolbarItem}>
@@ -399,8 +399,8 @@ class DataTables extends Component {
           </div>
         </Toolbar>
       </div>
-    );
+    )
   }
 }
 
-export default DataTables;
+export default DataTables

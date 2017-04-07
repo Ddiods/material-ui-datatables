@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
-import {TableBody} from 'material-ui/Table';
+import React, { PropTypes } from 'react'
+import { TableBody } from 'material-ui/Table'
 
 class DataTablesTableBody extends TableBody {
-  static muiName = 'TableBody';
+  static muiName = 'TableBody'
 
   static propTypes = {
     /**
@@ -108,11 +108,11 @@ class DataTablesTableBody extends TableBody {
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
-  };
+  }
 
-  createRows() {
-    const numChildren = React.Children.count(this.props.children);
-    let rowNumber = 0;
+  createRows () {
+    const numChildren = React.Children.count(this.props.children)
+    let rowNumber = 0
     const handlers = {
       onCellClick: this.onCellClick,
       onCellDoubleClick: this.onCellDoubleClick,
@@ -121,7 +121,7 @@ class DataTablesTableBody extends TableBody {
       onRowHover: this.onRowHover,
       onRowHoverExit: this.onRowHoverExit,
       onRowClick: this.onRowClick,
-    };
+    }
 
     return React.Children.map(this.props.children, (child) => {
       if (React.isValidElement(child)) {
@@ -130,31 +130,31 @@ class DataTablesTableBody extends TableBody {
           selected: this.isRowSelected(rowNumber),
           striped: this.props.stripedRows && (rowNumber % 2 === 0),
           rowNumber: rowNumber++,
-        };
+        }
 
         if (rowNumber === numChildren) {
-          props.displayBorder = false;
+          props.displayBorder = false
         }
 
         const children = [
           this.createRowCheckboxColumn(props),
-        ];
+        ]
 
         React.Children.forEach(child.props.children, (child) => {
-          children.push(child);
-        });
+          children.push(child)
+        })
 
-        return React.cloneElement(child, {...props, ...handlers}, children);
+        return React.cloneElement(child, {...props, ...handlers}, children)
       }
-    });
+    })
   }
 
   onCellDoubleClick = (event, rowNumber, columnNumber) => {
-    event.stopPropagation();
+    event.stopPropagation()
     if (this.props.onCellDoubleClick) {
-      this.props.onCellDoubleClick(rowNumber, this.getColumnId(columnNumber), event);
+      this.props.onCellDoubleClick(rowNumber, this.getColumnId(columnNumber), event)
     }
-  };
+  }
 }
 
-export default DataTablesTableBody;
+export default DataTablesTableBody

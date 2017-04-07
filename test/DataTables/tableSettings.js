@@ -1,68 +1,68 @@
-import {deepOrange500} from 'material-ui/styles/colors';
+import { deepOrange500 } from 'material-ui/styles/colors'
 
 export const TABLE_COLUMNS = [
   {
     key: 'name',
-    label: 'Dessert (100g serving)',
+    label: 'Dessert (100g serving)'
   }, {
     key: 'calories',
-    label: 'Calories',
+    label: 'Calories'
   }, {
     key: 'fat',
-    label: 'Fat (g)',
+    label: 'Fat (g)'
   }, {
     key: 'carbs',
-    label: 'Carbs (g)',
+    label: 'Carbs (g)'
   }, {
     key: 'protein',
-    label: 'Protein (g)',
+    label: 'Protein (g)'
   }, {
     key: 'sodium',
-    label: 'Sodium (mg)',
+    label: 'Sodium (mg)'
   }, {
     key: 'calcium',
-    label: 'Calcium (%)',
+    label: 'Calcium (%)'
   }, {
     key: 'iron',
-    label: 'Iron (%)',
-  },
-];
+    label: 'Iron (%)'
+  }
+]
 
 export const TABLE_COLUMNS_TOOLTIP = [
   {
     key: 'name',
     label: 'Dessert (100g serving)',
-    tooltip: 'Dessert (100g serving)',
+    tooltip: 'Dessert (100g serving)'
   }, {
     key: 'calories',
     label: 'Calories',
-    tooltip: 'Calories',
+    tooltip: 'Calories'
   }, {
     key: 'fat',
     label: 'Fat (g)',
-    tooltip: 'Fat (g)',
+    tooltip: 'Fat (g)'
   }, {
     key: 'carbs',
     label: 'Carbs (g)',
-    tooltip: 'Carbs (g)',
+    tooltip: 'Carbs (g)'
   }, {
     key: 'protein',
     label: 'Protein (g)',
-    tooltip: 'Protein (g)',
+    tooltip: 'Protein (g)'
   }, {
     key: 'sodium',
     label: 'Sodium (mg)',
-    tooltip: 'Sodium (mg)',
+    tooltip: 'Sodium (mg)'
   }, {
     key: 'calcium',
     label: 'Calcium (%)',
-    tooltip: 'Calcium (%)',
+    tooltip: 'Calcium (%)'
   }, {
     key: 'iron',
     label: 'Iron (%)',
-    tooltip: 'Iron (%)',
-  },
-];
+    tooltip: 'Iron (%)'
+  }
+]
 
 export const TABLE_COLUMNS_SORT_STYLE = [
   {
@@ -70,62 +70,62 @@ export const TABLE_COLUMNS_SORT_STYLE = [
     label: 'Dessert (100g serving)',
     sortable: true,
     style: {
-      width: 250,
+      width: 250
     }
   }, {
     key: 'calories',
     label: 'Calories',
-    sortable: true,
+    sortable: true
   }, {
     key: 'fat',
-    label: 'Fat (g)',
+    label: 'Fat (g)'
   }, {
     key: 'carbs',
-    label: 'Carbs (g)',
+    label: 'Carbs (g)'
   }, {
     key: 'protein',
-    label: 'Protein (g)',
+    label: 'Protein (g)'
   }, {
     key: 'sodium',
-    label: 'Sodium (mg)',
+    label: 'Sodium (mg)'
   }, {
     key: 'calcium',
-    label: 'Calcium (%)',
+    label: 'Calcium (%)'
   }, {
     key: 'iron',
-    label: 'Iron (%)',
-  },
-];
+    label: 'Iron (%)'
+  }
+]
 
 export const TABLE_COLUMNS_CLASSNAME = [
   {
     key: 'name',
     label: 'Dessert (100g serving)',
-    className: 'important-column',
+    className: 'important-column'
   }, {
     key: 'calories',
     label: 'Calories',
-    className: 'important-column',
+    className: 'important-column'
   }, {
     key: 'fat',
-    label: 'Fat (g)',
+    label: 'Fat (g)'
   }, {
     key: 'carbs',
-    label: 'Carbs (g)',
+    label: 'Carbs (g)'
   }, {
     key: 'protein',
-    label: 'Protein (g)',
+    label: 'Protein (g)'
   }, {
     key: 'sodium',
-    label: 'Sodium (mg)',
+    label: 'Sodium (mg)'
   }, {
     key: 'calcium',
-    label: 'Calcium (%)',
+    label: 'Calcium (%)'
   }, {
     key: 'iron',
-    label: 'Iron (%)',
-  },
-];
+    label: 'Iron (%)'
+  }
+]
 
 export const TABLE_DATA = [
   {
@@ -136,7 +136,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Ice cream sandwich',
     calories: '159',
@@ -145,7 +145,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Eclair',
     calories: '159',
@@ -154,7 +154,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Cupcake',
     calories: '159',
@@ -163,7 +163,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Gingerbread',
     calories: '159',
@@ -172,7 +172,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Jelly bean',
     calories: '159',
@@ -181,7 +181,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Lollipop',
     calories: '159',
@@ -190,7 +190,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Honeycomb',
     calories: '159',
@@ -199,7 +199,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'Donut',
     calories: '159',
@@ -208,7 +208,7 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
+    iron: '1%'
   }, {
     name: 'KitKat',
     calories: '159',
@@ -217,22 +217,22 @@ export const TABLE_DATA = [
     protein: '4.0',
     sodium: '87',
     calcium: '14%',
-    iron: '1%',
-  },
-];
+    iron: '1%'
+  }
+]
 
 export const styles = {
   footerToolbarItem: {
     marginLeft: 8,
     marginRight: 8,
     alignItems: 'center',
-    display: 'flex',
+    display: 'flex'
   },
   titleStyle: {
     fontSize: 16,
-    color: deepOrange500,
+    color: deepOrange500
   },
   footerToolbarStyle: {
-    padding: '0 100px',
-  },
-};
+    padding: '0 100px'
+  }
+}
